@@ -32,10 +32,6 @@ random.seed(0)
 import numpy as np
 np.random.seed(0)
 
-# Mount Google Drive
-from google.colab import drive
-drive.mount('/content/drive')
-
 
 class TrainingApp:
     def __init__(self):
