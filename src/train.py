@@ -76,7 +76,7 @@ class TrainingApp:
         )
 
         if wandb.config.PRETRAINED_MODEL_PTH:
-            if device == 'GPU':
+            if self.device == 'GPU':
                 if torch.cuda.is_available():
                     model.load_state_dict(torch.load(wandb.config.model_pth, map_location=torch.device('cuda')))
                 else:
