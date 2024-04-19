@@ -32,6 +32,10 @@ random.seed(0)
 import numpy as np
 np.random.seed(0)
 
+# Mount Google Drive
+from google.colab import drive
+drive.mount('/content/drive')
+
 
 class TrainingApp:
     def __init__(self):
@@ -70,6 +74,15 @@ class TrainingApp:
             d_ff=wandb.config.D_FF,
             dropout_proba=wandb.config.DROPOUT_PROBA
         )
+
+        if wandb.config.PRETRAINED_MODEL_PTH:
+            if device == 'GPU':
+                if torch.cuda.is_available():
+                    model.load_state_dict(torch.load(wandb.config.model_pth, map_location=torch.device('cuda')))
+                else:
+                    model.load_state_dict(torch.load(wandb.config.model_pth, map_location=torch.device('mps')))
+            else:
+                model.load_state_dict(torch.load(wandb.config.model_pth, map_location=torch.device('cpu')))
 
         loss_func = nn.CrossEntropyLoss(ignore_index=0, label_smoothing=0.1, reduction='mean')
 

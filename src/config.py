@@ -2,7 +2,8 @@ unofficial_single_gpu_config = dict(
     # RUN CONFIG:
     RUN_NAME='unofficial_single_gpu_run',
     RUN_DESCRIPTION='Default run on GPU, 10GB of VRAM needed for this.',
-    RUNS_FOLDER_PTH='../runs',  # TODO: change this for where to save
+    RUNS_FOLDER_PTH='/content/drive/MyDrive/runs/',
+    PRETRAINED_MODEL_PTH=None,
     # DATA CONFIG:
     DATASET_SIZE=80000,
     TEST_PROPORTION=0.001,
@@ -26,7 +27,7 @@ unofficial_single_gpu_config = dict(
     D_FF=2048,
     DROPOUT_PROBA=0.1,
     # OTHER:
-    MODEL_SAVE_EPOCH_CNT=50,
+    MODEL_SAVE_EPOCH_CNT=10,
     DEVICE='gpu',
     LABEL_SMOOTHING=0.1,
 )
