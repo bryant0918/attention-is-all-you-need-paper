@@ -74,11 +74,12 @@ class TrainingApp:
         if wandb.config.PRETRAINED_MODEL_PTH:
             if self.device == 'GPU':
                 if torch.cuda.is_available():
-                    model.load_state_dict(torch.load(wandb.config.model_pth, map_location=torch.device('cuda')))
+                    model.load_state_dict(torch.load(wandb.config.PRETRAINED_MODEL_PTH, map_location=torch.device('cuda')))
                 else:
-                    model.load_state_dict(torch.load(wandb.config.model_pth, map_location=torch.device('mps')))
+                    model.load_state_dict(torch.load(wandb.config.PRETRAINED_MODEL_PTH, map_location=torch.device('mps')))
             else:
-                model.load_state_dict(torch.load(wandb.config.model_pth, map_location=torch.device('cpu')))
+                model.load_state_dict(torch.load(wandb.config.PRETRAINED_MODEL_PTH, map_location=torch.device('cpu')))
+                print(f"Loaded model from {wandb.config.PRETRAINED_MODEL_PTH}")
 
         loss_func = nn.CrossEntropyLoss(ignore_index=0, label_smoothing=0.1, reduction='mean')
 
