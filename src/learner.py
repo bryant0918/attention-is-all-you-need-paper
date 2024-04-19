@@ -68,7 +68,8 @@ class Learner:
         self('before_fit')
         self.n_epochs=n_epochs
 
-        for self.epoch_idx in enumerateWithEstimate(range(n_epochs), desc_str="Training status"):
+        # 20 is because pretrained model was from epoch 20
+        for self.epoch_idx in enumerateWithEstimate(range(20, n_epochs), desc_str="Training status"):
             self.one_epoch(is_train=True)
             with torch.no_grad():
                 self.one_epoch(is_train=False)
