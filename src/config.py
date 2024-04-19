@@ -2,8 +2,8 @@ unofficial_single_gpu_config = dict(
     # RUN CONFIG:
     RUN_NAME='unofficial_single_gpu_run',
     RUN_DESCRIPTION='Default run on GPU, 10GB of VRAM needed for this.',
-    RUNS_FOLDER_PTH='/content/drive/MyDrive/runs/unofficial_single_gpu_run/model_ckpt_best.pt',
-    PRETRAINED_MODEL_PTH=None,
+    RUNS_FOLDER_PTH='/content/drive/MyDrive/runs/',
+    PRETRAINED_MODEL_PTH='/content/drive/MyDrive/runs/unofficial_single_gpu_run/model_ckpt_best.pt',
     # DATA CONFIG:
     DATASET_SIZE=80000,
     TEST_PROPORTION=0.001,
