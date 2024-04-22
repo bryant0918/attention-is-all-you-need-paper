@@ -130,11 +130,13 @@ english_translations = [
     "The leaves rustle in the wind and fall slowly."
 ]
 
-# Create DataFrame
-df2 = pd.DataFrame({
+dataset2 = {
     'German': german_sentences,
     'English': english_translations
-})
+}
+
+# Create DataFrame
+df2 = pd.DataFrame(dataset2)
 
 # print(df)
 

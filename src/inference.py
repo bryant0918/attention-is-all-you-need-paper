@@ -1,7 +1,7 @@
 from architectures.machine_translation_transformer import MachineTranslationTransformer
 from tokenizers import Tokenizer
 import torch
-from validation import df1, df2
+from validation import dataset1, dataset2
 import pandas as pd
 import os
 
@@ -51,15 +51,23 @@ class InferenceApp:
         tokenizer_pth = os.path.join(wandb.config.RUNS_FOLDER_PTH, wandb.config.RUN_NAME, 'tokenizer.json')
         tokenizer = Tokenizer.from_file(tokenizer_pth)
 
-        en1 = df1['English']
-        de1 = model.translate(en1, tokenizer)
-        df1_out = df1.assign("Predicted German"=de1)
+        en1 = dataset1['English']
+        de1 = []
+        for en in en1:
+            de = model.translate(en, tokenizer)
+            de1.append(de)
+        dataset1.update({'Predicted German': de1})
+        df1_out = pd.DataFrame(dataset1)
         df1_out_pth = os.path.join(wandb.config.RUNS_FOLDER_PTH, wandb.config.RUN_NAME, 'df1.csv')
         df1_out.to_csv(df1_out_pth)
 
-        en2 = df2['English']
-        de2 = model.translate(en2, tokenizer)
-        df2_out = df2.assign("Predited German"=de2)
+        en2 = dataset2['English']
+        de2 = []
+        for en in en2:
+            de = model.translate(en, tokenizer)
+            de2.append(de)
+        dataset2.update({'Predicted German': de2})
+        df2_out = pd.DataFrame(dataset2)
         df2_out_pth = os.path.join(wandb.config.RUNS_FOLDER_PTH, wandb.config.RUN_NAME, 'df2.csv')
         df2_out.to_csv(df2_out_pth)
 
