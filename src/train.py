@@ -5,8 +5,6 @@ import torch
 import torch.nn as nn
 import torch.optim as optim
 
-import wandb
-from config import configs
 from learner import Learner
 from scheduler import CustomScheduler
 from dataset import get_translation_dataloaders
