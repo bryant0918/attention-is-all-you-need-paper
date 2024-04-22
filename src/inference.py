@@ -2,6 +2,8 @@ from architectures.machine_translation_transformer import MachineTranslationTran
 from tokenizers import Tokenizer
 import torch
 from validation import df1, df2
+import pandas as pd
+import os
 
 # Initialize configuration
 import wandb
@@ -49,11 +51,19 @@ class InferenceApp:
         tokenizer_pth = os.path.join(wandb.config.RUNS_FOLDER_PTH, wandb.config.RUN_NAME, 'tokenizer.json')
         tokenizer = Tokenizer.from_file(tokenizer_pth)
 
-        eng1 = df1['English']
+        en1 = df1['English']
+        de1 = model.translate(en1, tokenizer)
+        df1_out = df1.assign("Predicted German"=de1)
+        df1_out_pth = os.path.join(wandb.config.RUNS_FOLDER_PTH, wandb.config.RUN_NAME, 'df1.csv')
+        df1_out.to_csv(df1_out_pth)
 
-        out = model.translate(text, tokenizer)
+        en2 = df2['English']
+        de2 = model.translate(en2, tokenizer)
+        df2_out = df2.assign("Predited German"=de2)
+        df2_out_pth = os.path.join(wandb.config.RUNS_FOLDER_PTH, wandb.config.RUN_NAME, 'df2.csv')
+        df2_out.to_csv(df2_out_pth)
 
-        return out
+        return
 
 if __name__ == "__main__":
     InferenceApp().main()
